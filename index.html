@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photography Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -32,6 +35,24 @@
         <a href="gallery.html" class="btn btn-primary">View Gallery</a>
       </div>
     </section>
+
+    <section class="featured">
+      <div class="featured-inner">
+        <h2 class="featured-title fade-in">Recent Work</h2>
+        <div class="featured-grid">
+          <a href="gallery.html" class="featured-item fade-in">
+            <img src="images/featured-1.jpg" alt="Featured photograph 1" class="featured-img">
+          </a>
+          <a href="gallery.html" class="featured-item fade-in">
+            <img src="images/featured-2.jpg" alt="Featured photograph 2" class="featured-img">
+          </a>
+          <a href="gallery.html" class="featured-item fade-in">
+            <img src="images/featured-3.jpg" alt="Featured photograph 3" class="featured-img">
+          </a>
+        </div>
+        <a href="gallery.html" class="btn btn-primary fade-in">View All Photos</a>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -39,6 +60,21 @@
   </footer>
 
   <script src="nav.js"></script>
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.fade-in');
+      if (!els.length || !window.IntersectionObserver) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
 
