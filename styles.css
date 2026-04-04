@@ -83,6 +83,23 @@ img {
   border-bottom-color: var(--color-border);
 }
 
+.site-header:not(.scrolled) .nav-link {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.site-header:not(.scrolled) .nav-link:hover,
+.site-header:not(.scrolled) .nav-link.active {
+  color: white;
+}
+
+.site-header:not(.scrolled) .site-logo {
+  color: white;
+}
+
+.site-header:not(.scrolled) .hamburger-bar {
+  background-color: white;
+}
+
 .header-inner {
   display: flex;
   align-items: center;
@@ -212,8 +229,9 @@ img {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(0, 0, 0, 0.15) 40%,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.05) 25%,
+    rgba(0, 0, 0, 0.05) 50%,
     rgba(0, 0, 0, 0.75) 100%
   );
 }
@@ -496,12 +514,21 @@ img {
 }
 
 .gallery-header {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 90;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--spacing-xl);
+}
+
+.gallery-header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: var(--max-width);
-  margin: 0 auto var(--spacing-xl);
-  padding: 0 var(--spacing-lg);
+  margin: 0 auto;
+  padding: var(--spacing-md) var(--spacing-lg);
   flex-wrap: wrap;
   gap: var(--spacing-md);
 }
