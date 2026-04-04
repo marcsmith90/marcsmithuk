@@ -6,7 +6,13 @@
       "WebSearch",
       "WebFetch(domain:themframes.com)",
       "WebFetch(domain:www.format.com)",
-      "WebFetch(domain:luanbaruti.ch)"
+      "WebFetch(domain:luanbaruti.ch)",
+      "Bash(uipro init:*)",
+      "Bash(python .claude/skills/ui-ux-pro-max/scripts/search.py \"nature landscape photography portfolio dark elegant editorial\" --design-system -p \"Marc Smith Photography\")",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"nature landscape photography portfolio dark elegant editorial\" --design-system -p \"Marc Smith Photography\")",
+      "Bash(where python:*)",
+      "Bash(where python3:*)",
+      "Bash(py --version)"
     ]
   }
 }
