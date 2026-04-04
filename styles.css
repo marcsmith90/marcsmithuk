@@ -67,12 +67,20 @@ img {
    Site Header
    ============================================================ */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
-  background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
   height: var(--header-height);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.site-header.scrolled {
+  background-color: var(--color-surface);
+  border-bottom-color: var(--color-border);
 }
 
 .header-inner {
@@ -86,10 +94,10 @@ img {
 }
 
 .site-logo {
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
   color: var(--color-accent);
 }
 
@@ -184,12 +192,18 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - var(--header-height));
+  min-height: 100vh;
   padding: var(--spacing-xl) var(--spacing-lg);
   text-align: center;
   background-image: url('images/DJI_20260128135406_0023_D.webp');
   background-size: cover;
   background-position: center;
+}
+
+@media (min-width: 641px) {
+  .hero {
+    background-attachment: fixed;
+  }
 }
 
 .hero::before {
@@ -283,13 +297,21 @@ img {
    Featured Section (index.html)
    ============================================================ */
 .featured {
-  padding: var(--spacing-xl) var(--spacing-lg);
+  padding: var(--spacing-xl) 0;
 }
 
 .featured-inner {
   max-width: var(--max-width);
   margin: 0 auto;
   text-align: center;
+  padding: 0 var(--spacing-lg);
+}
+
+.featured-inner > .featured-grid {
+  padding: 0;
+  margin-left: calc(-1 * var(--spacing-lg));
+  margin-right: calc(-1 * var(--spacing-lg));
+  width: calc(100% + var(--spacing-lg) * 2);
 }
 
 .featured-title {
@@ -304,7 +326,7 @@ img {
 .featured-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-md);
+  gap: 4px;
   margin-bottom: var(--spacing-xl);
 }
 
@@ -358,7 +380,7 @@ img {
 }
 
 /* ============================================================
-   Button
+   Buttons & Links
    ============================================================ */
 .btn {
   display: inline-block;
@@ -380,13 +402,38 @@ img {
   opacity: 0.85;
 }
 
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: var(--color-text);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-text);
+}
+
+.view-all-link {
+  display: inline-block;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.view-all-link:hover {
+  color: var(--color-text);
+}
+
 /* ============================================================
    Inner Page Sections (gallery.html, contact.html)
    ============================================================ */
 .page-section {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-lg);
+  padding: calc(var(--spacing-xl) + var(--header-height)) var(--spacing-lg) var(--spacing-xl);
 }
 
 .page-title {
