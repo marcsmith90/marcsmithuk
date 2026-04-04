@@ -224,6 +224,62 @@ img {
   letter-spacing: 0.04em;
 }
 
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.scroll-arrow {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-right: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
+  transform: rotate(45deg);
+  animation: scrollBounce 1.6s ease infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
+  50%       { transform: rotate(45deg) translateY(7px); opacity: 1; }
+}
+
+/* ============================================================
+   About Teaser (index.html)
+   ============================================================ */
+.about-teaser {
+  padding: var(--spacing-xl) var(--spacing-lg);
+  text-align: center;
+}
+
+.about-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.about-text {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   Section Divider
+   ============================================================ */
+.section-divider {
+  width: 40px;
+  height: 1px;
+  background-color: var(--color-border);
+  margin: 0 auto;
+}
+
 /* ============================================================
    Featured Section (index.html)
    ============================================================ */
@@ -258,6 +314,10 @@ img {
   overflow: hidden;
   aspect-ratio: 3 / 2;
   background-color: var(--color-surface);
+}
+
+.featured-item--tall {
+  aspect-ratio: 2 / 3;
 }
 
 .featured-img {
@@ -375,6 +435,25 @@ img {
   color: var(--color-text-muted);
   font-size: 0.8rem;
   letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.social-link {
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.social-link:hover {
+  color: var(--color-text);
+}
+
+.social-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 /* ============================================================
