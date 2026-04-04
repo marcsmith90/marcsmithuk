@@ -181,6 +181,27 @@
   <script src="nav.js"></script>
   <script>
     (function () {
+      // Sticky filters
+      var filtersBar = document.querySelector('.gallery-header');
+      if (filtersBar) {
+        var sentinel = document.createElement('div');
+        filtersBar.parentNode.insertBefore(sentinel, filtersBar);
+        var headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height'));
+        window.addEventListener('scroll', function () {
+          if (sentinel.getBoundingClientRect().top <= headerHeight) {
+            if (!filtersBar.classList.contains('is-stuck')) {
+              sentinel.style.height = filtersBar.offsetHeight + 'px';
+              filtersBar.classList.add('is-stuck');
+            }
+          } else {
+            filtersBar.classList.remove('is-stuck');
+            sentinel.style.height = '0';
+          }
+        }, { passive: true });
+      }
+    })();
+
+    (function () {
       // Fade-in on scroll
       var fadeEls = document.querySelectorAll('.fade-in');
       if (window.IntersectionObserver) {

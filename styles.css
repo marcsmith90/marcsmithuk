@@ -514,12 +514,17 @@ img {
 }
 
 .gallery-header {
-  position: sticky;
-  top: var(--header-height);
-  z-index: 90;
   background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
   margin-bottom: var(--spacing-xl);
+}
+
+.gallery-header.is-stuck {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  z-index: 90;
 }
 
 .gallery-header-inner {
