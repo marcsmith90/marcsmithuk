@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery — Photography Portfolio</title>
+  <title>Gallery — Marc Smith Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,19 +28,164 @@
   </header>
 
   <main class="site-main">
-    <section class="page-section">
-      <h1 class="page-title">Gallery</h1>
-      <div class="photo-grid" id="photo-grid">
-        <!-- Photos will be dynamically populated in Phase 2 -->
-        <p class="gallery-placeholder">Photos coming soon.</p>
+    <section class="gallery-page">
+      <div class="gallery-header">
+        <h1 class="gallery-page-title">Gallery</h1>
+        <div class="gallery-filters" role="group" aria-label="Filter by category">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="aerial">Aerial</button>
+          <button class="filter-btn" data-filter="landscape">Landscape</button>
+        </div>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <div class="gallery-item fade-in" data-category="aerial">
+          <img src="images/DJI_20260128135406_0023_D.webp" alt="Aerial landscape" loading="lazy">
+          <div class="gallery-item-overlay"></div>
+        </div>
+        <div class="gallery-item fade-in" data-category="landscape">
+          <img src="images/IMG_6391.webp" alt="Landscape photograph" loading="lazy">
+          <div class="gallery-item-overlay"></div>
+        </div>
+        <div class="gallery-item fade-in" data-category="aerial">
+          <img src="images/DJI_20260128135518_0029_D.webp" alt="Aerial landscape" loading="lazy">
+          <div class="gallery-item-overlay"></div>
+        </div>
+        <div class="gallery-item fade-in" data-category="landscape">
+          <img src="images/IMG_6397.webp" alt="Landscape photograph" loading="lazy">
+          <div class="gallery-item-overlay"></div>
+        </div>
+        <div class="gallery-item fade-in" data-category="landscape">
+          <img src="images/IMG_6411.webp" alt="Landscape photograph" loading="lazy">
+          <div class="gallery-item-overlay"></div>
+        </div>
+        <div class="gallery-item fade-in" data-category="aerial">
+          <img src="images/DJI_20260128135740_0035_D.webp" alt="Aerial landscape" loading="lazy">
+          <div class="gallery-item-overlay"></div>
+        </div>
+        <div class="gallery-item fade-in" data-category="landscape">
+          <img src="images/IMG_6436.webp" alt="Landscape photograph" loading="lazy">
+          <div class="gallery-item-overlay"></div>
+        </div>
+        <div class="gallery-item fade-in" data-category="landscape">
+          <img src="images/IMG_6445.webp" alt="Landscape photograph" loading="lazy">
+          <div class="gallery-item-overlay"></div>
+        </div>
+        <div class="gallery-item fade-in" data-category="landscape">
+          <img src="images/IMG_6448.webp" alt="Landscape photograph" loading="lazy">
+          <div class="gallery-item-overlay"></div>
+        </div>
+        <div class="gallery-item fade-in" data-category="landscape">
+          <img src="images/IMG_6481.webp" alt="Landscape photograph" loading="lazy">
+          <div class="gallery-item-overlay"></div>
+        </div>
       </div>
     </section>
   </main>
 
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" aria-label="Previous image">&#8592;</button>
+    <button class="lightbox-next" aria-label="Next image">&#8594;</button>
+    <div class="lightbox-inner">
+      <img class="lightbox-img" src="" alt="">
+    </div>
+  </div>
+
   <footer class="site-footer">
-    <p>&copy; 2026 Photography Portfolio</p>
+    <p>&copy; 2026 Marc Smith</p>
+    <a href="https://instagram.com/marcsmithuk" class="social-link" aria-label="Instagram" target="_blank" rel="noopener">
+      <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
   </footer>
 
   <script src="nav.js"></script>
+  <script>
+    (function () {
+      // Fade-in on scroll
+      var fadeEls = document.querySelectorAll('.fade-in');
+      if (window.IntersectionObserver) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.08 });
+        fadeEls.forEach(function (el) { io.observe(el); });
+      }
+
+      // Gallery filter
+      var filterBtns = document.querySelectorAll('.filter-btn');
+      var items = document.querySelectorAll('.gallery-item');
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          var filter = btn.dataset.filter;
+          items.forEach(function (item) {
+            if (filter === 'all' || item.dataset.category === filter) {
+              item.style.display = '';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // Lightbox
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = lightbox.querySelector('.lightbox-img');
+      var visibleImages = [];
+      var currentIndex = 0;
+
+      function getVisibleItems() {
+        return Array.from(items).filter(function (i) { return i.style.display !== 'none'; });
+      }
+
+      function openLightbox(index) {
+        visibleImages = getVisibleItems();
+        currentIndex = index;
+        lightboxImg.src = visibleImages[currentIndex].querySelector('img').src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        lightboxImg.src = '';
+      }
+
+      function showPrev() {
+        currentIndex = (currentIndex - 1 + visibleImages.length) % visibleImages.length;
+        lightboxImg.src = visibleImages[currentIndex].querySelector('img').src;
+      }
+
+      function showNext() {
+        currentIndex = (currentIndex + 1) % visibleImages.length;
+        lightboxImg.src = visibleImages[currentIndex].querySelector('img').src;
+      }
+
+      items.forEach(function (item, i) {
+        item.addEventListener('click', function () { openLightbox(i); });
+      });
+
+      lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+      lightbox.querySelector('.lightbox-prev').addEventListener('click', function (e) { e.stopPropagation(); showPrev(); });
+      lightbox.querySelector('.lightbox-next').addEventListener('click', function (e) { e.stopPropagation(); showNext(); });
+      lightbox.addEventListener('click', function (e) { if (e.target === lightbox || e.target === lightbox.querySelector('.lightbox-inner')) closeLightbox(); });
+
+      document.addEventListener('keydown', function (e) {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+      });
+    })();
+  </script>
 </body>
 </html>

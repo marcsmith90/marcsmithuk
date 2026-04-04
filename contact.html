@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — Photography Portfolio</title>
+  <title>Contact — Marc Smith Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,20 +28,86 @@
   </header>
 
   <main class="site-main">
-    <section class="page-section">
-      <h1 class="page-title">Contact</h1>
-      <p class="contact-intro">Interested in prints or licensing? Get in touch.</p>
-      <!-- Contact form will be wired in Phase 3 -->
-      <div class="contact-placeholder">
-        <p>Contact form coming soon.</p>
+    <section class="contact-page">
+      <div class="contact-layout">
+
+        <div class="contact-info fade-in">
+          <p class="contact-eyebrow">Get in touch</p>
+          <h1 class="contact-title">Let's work<br>together</h1>
+          <p class="contact-body">Available for print sales, licensing, and commissions. Based in the UK and open to travel for the right project.</p>
+          <div class="contact-details">
+            <div class="contact-detail">
+              <span class="contact-detail-label">Location</span>
+              <span class="contact-detail-value">United Kingdom</span>
+            </div>
+            <div class="contact-detail">
+              <span class="contact-detail-label">Instagram</span>
+              <a href="https://instagram.com/marcsmithuk" class="contact-detail-value contact-detail-link" target="_blank" rel="noopener">@marcsmithuk</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap fade-in">
+          <!--
+            To make this form work:
+            1. Go to formspree.io and sign up (free)
+            2. Create a new form and copy your form ID
+            3. Replace YOUR_FORM_ID below with your actual ID
+          -->
+          <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="form-group">
+              <label class="form-label" for="name">Name</label>
+              <input class="form-input" type="text" id="name" name="name" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input class="form-input" type="email" id="email" name="email" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="subject">Subject</label>
+              <select class="form-input form-select" id="subject" name="subject">
+                <option value="">Select a reason</option>
+                <option value="print">Print purchase</option>
+                <option value="licensing">Licensing</option>
+                <option value="commission">Commission</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="message">Message</label>
+              <textarea class="form-input form-textarea" id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button class="btn btn-primary form-submit" type="submit">Send Message</button>
+          </form>
+        </div>
+
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>&copy; 2026 Photography Portfolio</p>
+    <p>&copy; 2026 Marc Smith</p>
+    <a href="https://instagram.com/marcsmithuk" class="social-link" aria-label="Instagram" target="_blank" rel="noopener">
+      <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
   </footer>
 
   <script src="nav.js"></script>
+  <script>
+    (function () {
+      var fadeEls = document.querySelectorAll('.fade-in');
+      if (!fadeEls.length || !window.IntersectionObserver) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+      fadeEls.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>

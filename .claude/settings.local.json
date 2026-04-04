@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "WebFetch(domain:www.instagram.com)",
+      "WebSearch",
+      "WebFetch(domain:themframes.com)",
+      "WebFetch(domain:www.format.com)"
     ]
   }
 }
