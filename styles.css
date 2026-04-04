@@ -11,8 +11,8 @@
   --color-btn-bg: #f0ece4;
   --color-btn-text: #0f0f0f;
 
-  --font-family: 'Mukta', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-heading: 'Libre Baskerville', Georgia, serif;
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
   --font-size-base: 16px;
   --line-height-base: 1.6;
 
