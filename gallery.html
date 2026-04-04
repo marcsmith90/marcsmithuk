@@ -191,9 +191,19 @@
         fadeEls.forEach(function (el) { io.observe(el); });
       }
 
-      // Gallery filter
+      // Gallery filter — with live counts
       var filterBtns = document.querySelectorAll('.filter-btn');
       var items = document.querySelectorAll('.gallery-item');
+
+      // Add counts to filter buttons
+      filterBtns.forEach(function (btn) {
+        var filter = btn.dataset.filter;
+        var count = filter === 'all'
+          ? items.length
+          : Array.from(items).filter(function (i) { return i.dataset.category === filter; }).length;
+        btn.innerHTML = btn.textContent.trim() + ' <span class="filter-count">' + count + '</span>';
+      });
+
       filterBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
           filterBtns.forEach(function (b) { b.classList.remove('active'); });
